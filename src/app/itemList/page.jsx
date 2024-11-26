@@ -12,7 +12,11 @@ function Page(props) {
             API_URL
         ).then(res => {
             // console.log(res.data)
-            setList(res.data);
+            // setList(res.data);
+
+            // 상위 12개 데이터만 추출
+            setList(res.data.slice(0, 12));
+
         }).catch(
             console.log("에러발생")
         )
