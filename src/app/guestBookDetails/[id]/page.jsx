@@ -3,6 +3,7 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import './guestBookDetails.css'
 
 function Page({ params }) {
     const LOCAL_API_BASE_URL = process.env.NEXT_PUBLIC_LOCAL_API_BASE_URL;
