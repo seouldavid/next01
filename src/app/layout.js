@@ -1,13 +1,23 @@
 
 // layout.js는 선택이다.(RootLayout 제외)
 // layout 이 필요없는 간단한 페이지에서는 생략 가능
-
+"use client"
 import Link from "next/link";
 import './globals.css'
 // 페이지 전체의 공통 구조를 렌더링 할때 사용
 
+import useAuthStore from '../../store/authStore';
 // 부모컴포넌트
+
+//zustand store 호출
 export default function RootLayout({ children }) {
+  //zustand 상태 가져오기
+  const { isAuthenticated,user } = useAuthStore();
+
+  const handlelogout = () => {
+    logout();
+    alert("로그아웃 되었습니다.");
+  }
   return (
     <html lang="en">
       <body style={{ textAlign: "center" }}>
@@ -24,8 +34,15 @@ export default function RootLayout({ children }) {
           <li><Link href="/gallery"> image </Link></li>
           <li><Link href="/itemList">ItemList(외부서버)</Link></li>
           <li><Link href="/guestBookList">Guestbook(Spring 서버)</Link></li>
+          
+          {isAuthenticated ? (<>
+          {user.m_id} 님 환영합니다
+          <li><Link href="/login">logout(Spring 서버)</Link></li>
+          </>
+          ): ( <>
           <li><Link href="/login">login(Spring 서버)</Link></li>
           <li><Link href="/join">join(Spring 서버)</Link></li>
+          </>)}
         </ol>
         <hr />
         {children}
